@@ -1,8 +1,10 @@
 package models;
 
 public abstract class ContaBancaria {
+	//Declarando atributos
     private double saldo;
 
+    //Construtor da classe
     public ContaBancaria(double saldo) {
         this.saldo = saldo;
     }

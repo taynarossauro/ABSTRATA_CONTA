@@ -1,8 +1,10 @@
 package models;
 
 public class ContaPoupanca extends ContaBancaria {
+	//Declarando atributos
     private final double taxa = 1.50;
 
+    //Construtor da classe
     public ContaPoupanca(double saldo) {
         super(saldo);
     }

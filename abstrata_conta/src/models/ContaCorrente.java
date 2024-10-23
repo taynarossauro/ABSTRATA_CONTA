@@ -1,9 +1,11 @@
 package models;
 
 public class ContaCorrente extends ContaBancaria {
+	//Declarando atributos
     private double limite;
     private final double taxa = 2.00;
 
+    //Construtor da classe
     public ContaCorrente(double saldo, double limite) {
         super(saldo);
         this.limite = limite;
