@@ -2,6 +2,7 @@ package models;
 
 public class ContaCorrente extends ContaBancaria {
     private double limite;
+    private final double taxa = 2.00;
 
     public ContaCorrente(double saldo, double limite) {
         super(saldo);
@@ -20,22 +21,37 @@ public class ContaCorrente extends ContaBancaria {
     // Implementação dos métodos abstratos
     @Override
     public String sacar(double valor) {
-        if (getSaldo() + limite >= valor) {
-            setSaldo(getSaldo() - valor);
-            return "Seu saque foi realizado com sucesso!!\nSaldo atual: " + getSaldo();
+        double valorComTaxa = valor + taxa;
+        
+        if (valorComTaxa <= 0) {
+            return "Valor inválido para o saque.";
+        }
+        
+        if (getSaldo() + limite >= valorComTaxa) {
+            setSaldo(getSaldo() - valorComTaxa);
+            if (getSaldo() < 0) {
+                return "Saque realizado com sucesso usando o limite" + "\nSaldo atual: " + getSaldo();
+            } else {
+                return "Saque realizado com sucesso!\nSaldo atual: " + getSaldo();
+            }
         } else {
             return "Saldo insuficiente, mesmo com o limite.";
         }
     }
 
-    //Sobrescrevendo os métodos
     @Override
     public void depositar(double valor) {
-        setSaldo(getSaldo() + valor);
+        if (valor <= 0) {
+            System.out.println("Valor inválido para o depósito.");
+            return;
+        }
+        
+        setSaldo(getSaldo() + valor - taxa);
     }
 
     @Override
     public double consultar() {
+        setSaldo(getSaldo() - taxa); 
         return getSaldo();
     }
 }
